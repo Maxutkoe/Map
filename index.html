@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://api-maps.yandex.ru/2.0-stable/?apikey=YOUR_APY_KEY&load=package.full&lang=ru-RU" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre&family=Oswald:wght@200...700&display=swap" rel="stylesheet">
   </head>
   <body>
   <!---<style>
@@ -17,15 +20,32 @@ div#map {
 }
   </style>-->
   <style>
-  #tt{
-    width: 1000px;
-    height: 200px;
-    background-color: #000;
+  #map{
+    width: 98%;
+    height: 98%;
     position: absolute;
-    top: 700px;
+    left: 25px;
+    top: 25px;
+  }
+  #hh{
+    width: 99%;
+    height: 100px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -4%;
+  }
+  .ymaps-layers-pane {
+	-webkit-filter: grayscale(0.9);
+  }
+
+  .ymaps-b-balloon{
+    border: 2.7px solid #000;
+    border-radius: 10px;
+    color: #000;
   }
   </style>
   <script type="text/javascript">
+  let headerFont = 'Edu AU VIC WA NT Pre';
     // Функция ymaps.ready() будет вызвана, когда
     // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
     ymaps.ready(init);
@@ -36,17 +56,24 @@ div#map {
             // Порядок по умолчанию: «широта, долгота».
             // Чтобы не определять координаты центра карты вручную,
             // воспользуйтесь инструментом Определение координат.
-            center: [55.76, 37.64],
+            center: [51.71716, 39.17062],
             // Уровень масштабирования. Допустимые значения:
             // от 0 (весь мир) до 19.
-            zoom: 10,
-            controls: []
+            zoom: 19,
         });
-    var myPlacemark = new ymaps.Placemark([55.75,36.75], {
-      hintContent: 'ООО "Рога и копыта"',
-			balloonContentHeader: "Заголовок",
-		  balloonContentBody: "Содержимое",
-		  balloonContentFooter: "Подвал",
+         myMap.controls.remove("mapTools")
+    .remove("typeSelector")
+    .remove("searchControl")
+    .remove("trafficControl")
+    .remove("miniMap")
+    .remove("scaleLine")
+    .remove("routeEditor")
+    .remove("smallZoomControl");
+    var myPlacemark = new ymaps.Placemark([51.71716, 39.17062], {
+      hintContent: 'Mk. Studio',
+			balloonContentHeader: `<font style="font-family: ${headerFont}, cursive; font-weight: 400; font-style: normal;">Mk. Studio</font>`,
+		  balloonContentBody: `<font style="font-family: ${headerFont}, cursive; font-weight: 400; font-style: normal;">TTT</font>TTT`,
+		  // balloonContentFooter: "Подвал",
     },{
 	iconLayout: 'default#image',
 	iconImageHref: "https://cdn.joincommunity.xyz/notcoin/NOTsmall.png",
@@ -63,11 +90,11 @@ var myGeoObject = new ymaps.GeoObject({
             coordinates: [
                 // Координаты вершин внешнего контура.
                 [
-                    [55.75, 37.80],
-                    [55.80, 37.90],
-                    [55.75, 38.00],
-                    [55.70, 38.00],
-                    [55.70, 37.80]
+                    [51.71706, 39.17022],
+                    [51.71727, 39.17032],
+                    [51.71778, 39.17129],
+                    [51.71779, 39.17132],
+                    [51.71730, 39.17234]
                 ],
                 // Координаты вершин внутреннего контура.
                 [
@@ -106,10 +133,11 @@ myMap.geoObjects.add(myPlacemark);
 }
 
 </script>
-  <div id="map" style="width: 1000px; height: 800px"></div>
-  <button type="submit" onclick="createPolygon()"></button>
-  <div id="tt">
-    Block
+<div id="gg">
+  <div id="map"></div>
+  <div id="hh">
+  
   </div>
+</div>
   </body>
 </html>
