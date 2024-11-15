@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://api-maps.yandex.ru/2.0-stable/?apikey=YOUR_APY_KEY&load=package.full&lang=ru-RU" type="text/javascript"></script>
+  </head>
+  <body>
+  <!---<style>
+div#map {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+}
+  </style>-->
+  <style>
+  #tt{
+    width: 1000px;
+    height: 200px;
+    background-color: #000;
+    position: absolute;
+    top: 700px;
+  }
+  </style>
+  <script type="text/javascript">
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+    ymaps.ready(init);
+    function init(){
+        // Создание карты.
+        var myMap = new ymaps.Map("map", {
+            // Координаты центра карты.
+            // Порядок по умолчанию: «широта, долгота».
+            // Чтобы не определять координаты центра карты вручную,
+            // воспользуйтесь инструментом Определение координат.
+            center: [55.76, 37.64],
+            // Уровень масштабирования. Допустимые значения:
+            // от 0 (весь мир) до 19.
+            zoom: 10,
+            controls: []
+        });
+    var myPlacemark = new ymaps.Placemark([55.75,36.75], {
+      hintContent: 'ООО "Рога и копыта"',
+			balloonContentHeader: "Заголовок",
+		  balloonContentBody: "Содержимое",
+		  balloonContentFooter: "Подвал",
+    },{
+	iconLayout: 'default#image',
+	iconImageHref: "https://cdn.joincommunity.xyz/notcoin/NOTsmall.png",
+	iconImageSize: [30, 44],
+	iconImageOffset: [-15, -44],
+});
+
+var myGeoObject = new ymaps.GeoObject({
+        // Описываем геометрию геообъекта.
+        geometry: {
+            // Тип геометрии - "Многоугольник".
+            type: "Polygon",
+            // Указываем координаты вершин многоугольника.
+            coordinates: [
+                // Координаты вершин внешнего контура.
+                [
+                    [55.75, 37.80],
+                    [55.80, 37.90],
+                    [55.75, 38.00],
+                    [55.70, 38.00],
+                    [55.70, 37.80]
+                ],
+                // Координаты вершин внутреннего контура.
+                [
+                    [55.75, 37.92],
+                    [55.75, 38.8],
+                    [55.65, 37.90]
+                ]
+            ],
+            // Задаем правило заливки внутренних контуров по алгоритму "nonZero".
+            fillRule: "nonZero"
+        },
+        // Описываем свойства геообъекта.
+        properties:{
+            // Содержимое балуна.
+            balloonContent: "Многоугольник"
+        }
+    }, {
+        // Описываем опции геообъекта.
+        // Цвет заливки.
+        fillColor: '#00FF00',
+        // Цвет обводки.
+        strokeColor: '#0000FF',
+        // Общая прозрачность (как для заливки, так и для обводки).
+        opacity: 0.5,
+        // Ширина обводки.
+        strokeWidth: 5,
+        // Стиль обводки.
+        strokeStyle: 'shortdash'
+    });
+
+    // Добавляем многоугольник на карту.
+    myMap.geoObjects.add(myGeoObject);
+
+myMap.geoObjects.add(myPlacemark);
+
+}
+
+</script>
+  <div id="map" style="width: 1000px; height: 800px"></div>
+  <button type="submit" onclick="createPolygon()"></button>
+  <div id="tt">
+    Block
+  </div>
+  </body>
+</html>
